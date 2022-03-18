@@ -12,9 +12,13 @@ import { InputAdornment } from '@mui/material';
 import styled from '@emotion/styled';
 import { height } from '@mui/system';
 import {MenuForm, Salary} from '../style/style';
+import { response } from '../api/axios';
 
 export default function Menu() {
+
+  
   return (
+
     <MenuForm>
       <FormGroup><h3>Сфера деятельности</h3>
         <FormControlLabel control={<Checkbox />} label={'Фронтенд'}></FormControlLabel>
