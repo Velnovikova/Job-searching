@@ -1,10 +1,8 @@
-import React from 'react';
-import Header from '../component/Header';
+import MainLayout from '../layout/main';
 export default function Profile() {
     return (
-      <main>
-        <Header />
+      <MainLayout>
         <h2>Profile</h2>
-      </main>
+      </MainLayout>
     );
   }

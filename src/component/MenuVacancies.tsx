@@ -1,5 +1,4 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -9,14 +8,12 @@ import Checkbox from '@mui/material/Checkbox'
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { TextField } from '@mui/material';
 import { InputAdornment } from '@mui/material';
-import styled from '@emotion/styled';
-import { height } from '@mui/system';
 import {MenuForm, Salary} from '../style/style';
-import { response } from '../api/axios';
 
-export default function Menu() {
 
-  
+export default function MenuVacancies() {
+
+
   return (
 
     <MenuForm>

@@ -1,15 +1,15 @@
 import React from 'react'
 import Header from '../component/Header';
-import Menu from '../component/Menu';
+import MenuVacancies from '../component/MenuVacancies';
+import MainLayout from '../layout/main';
 import { Content } from '../style/style';
 export default function Salaries() {
     return (
-      <main>
-          <Header />
+      <MainLayout>
           <Content>
           <h2>Salaries</h2>
-          <Menu />
+          <MenuVacancies />
         </Content>
-      </main>
+      </MainLayout>
     );
   }

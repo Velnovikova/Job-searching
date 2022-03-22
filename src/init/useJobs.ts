@@ -4,7 +4,7 @@ import { setJobs } from '../reducers/jobs'
 import { useSelector } from 'react-redux'
 import { AppState } from '../reducers/rootReducer'
 import { JobState } from '../types/Job'
-import { response } from '../api/axios'
+import { getJobs } from '../api/quries'
 
 export const useJobs = (): JobState => {
     const dispatch = useDispatch();
@@ -12,12 +12,13 @@ export const useJobs = (): JobState => {
 
     const { list } = useSelector<AppState, JobState>((state) => state.jobs);
     React.useEffect(() => {
-        response.then((res) =>
-            dispatch(setJobs(res.data))
-        )
-    }, [dispatch]);
-    return {
-        list
-    }
+        getJobs().then((res) => {
+          dispatch(setJobs(res.data));
+        });
+      }, [dispatch]);
+    
+      return {
+        list,
+      };
 
 }

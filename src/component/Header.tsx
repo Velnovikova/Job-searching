@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from 'react-router-dom';
-import { Box } from "@mui/system";
+import { Box, minWidth } from "@mui/system";
 import { AppBar, Toolbar } from "@mui/material";
 import { MenuItem, Select } from "@mui/material";
 import { Stack } from "@mui/material";
@@ -10,8 +10,8 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 
 export default function Header() {
     return (
-        <AppBar  style={{position:'static', background: 'black',width:'100%' }}>
-            <Toolbar>
+        <AppBar  style={{ position:'static',background: 'black',width:'100%' }}>
+           <Toolbar>
                 <Link to="/" style={{ textDecoration: 'none', color: 'white', fontSize: '18px', fontWeight: '500', textTransform: 'uppercase' }}><LinkItem>Jobs</LinkItem></Link>
                 <Link to="/expenses" style={{ textDecoration: 'none', color: 'white', fontSize: '18px', fontWeight: '500', textTransform: 'uppercase' }}><LinkItem>Specialist</LinkItem></Link>
                 <Link to="/invoices" style={{ textDecoration: 'none', color: 'white', fontSize: '18px', fontWeight: '500', textTransform: 'uppercase' }}><LinkItem>Companies</LinkItem></Link>
@@ -39,6 +39,7 @@ export default function Header() {
                     </Select>
                 </Searching>
                 <Link to="/profile" style={{ textDecoration: 'none', color: 'white', fontSize: '18px', fontWeight: '500', textTransform: 'uppercase',marginLeft: 'auto' }}><LinkItem>Profile</LinkItem></Link>
+                
             </Toolbar>
         </AppBar>
 

@@ -1,5 +1,12 @@
 import styled from '@emotion/styled';
+export const SearchMenu=styled.div`
+display:flex;
+flex-direction:column;`
+
+
+
 export const Content=styled.div`
+min-height: 920px;
 display:flex;
 `
  export const MenuForm = styled.div`
@@ -25,4 +32,7 @@ export const Searching=styled.div`
 display:flex;
 margin-left:auto;
 `
-
+export const FooterSt = styled.footer`
+color:white;
+background-color:black;
+min-height:100px;`
