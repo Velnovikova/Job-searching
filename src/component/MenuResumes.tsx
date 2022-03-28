@@ -8,12 +8,29 @@ import Checkbox from '@mui/material/Checkbox'
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { TextField } from '@mui/material';
 import { InputAdornment } from '@mui/material';
+import { OutlinedInput } from '@mui/material';
+import { ListItemText } from '@mui/material';
 import {MenuForm, Salary} from '../style/style';
+import { Level } from '../types/Resume';
 
+type Props={
+  selectedLevel:keyof typeof Level | '',
+  selectedSkills:string[],
+  handleChangeLevel(param:string):void,
+  handleChangeSkills(param:string[]):void
+}
+export default function MenuResumes({selectedLevel,selectedSkills,handleChangeLevel,handleChangeSkills}:Props) {
+  const handleChangeL=(e:SelectChangeEvent)=>{
+    handleChangeLevel(e.target.value as string)
+  }
+  const handleChangeT = (event: SelectChangeEvent<typeof selectedSkills>) => {
+    const {
+      target: { value },
+    } = event;
 
-export default function MenuResumes() {
-
-
+    handleChangeSkills(typeof value === 'string' ? value.split(',') : value);
+  };
+  const tags = ['react', 'php', 'typescript', 'redux', 'html', 'css'];
   return (
 
     <MenuForm>
@@ -23,25 +40,33 @@ export default function MenuResumes() {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={10}
+          value={selectedLevel}
+          onChange={handleChangeL}
+          
         >
-          <MenuItem value={10}>Любая</MenuItem>
-          <MenuItem value={20}>Junior</MenuItem>
-          <MenuItem value={30}>Middle</MenuItem>
-          <MenuItem value={30}>Senior</MenuItem>
+          <MenuItem value={Level.Junior}>Junior</MenuItem>
+          <MenuItem value={Level.Middle}>Middle</MenuItem>
+          <MenuItem value={Level.Senior}>Senior</MenuItem>
         </Select>
       </FormControl>
       <FormControl >
         <h3>Професиональные навыки</h3>
         <InputLabel id="demo-simple-select-label"></InputLabel>
         <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={10}
+          labelId="demo-multiple-checkbox-label"
+          id="demo-multiple-checkbox"
+          multiple
+          value={selectedSkills}
+          onChange={handleChangeT}
+          input={<OutlinedInput  />}
+          renderValue={(selected) => selected.join(', ')}
         >
-          <MenuItem value={10}>Навык</MenuItem>
-          <MenuItem value={20}>Навык</MenuItem>
-          <MenuItem value={30}>Навык</MenuItem>
+          {tags.map((tag) => (
+            <MenuItem key={tag} value={tag}>
+              <Checkbox checked={selectedSkills.indexOf(tag) > -1} />
+              <ListItemText primary={tag} />
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
       <FormGroup>
@@ -57,7 +82,8 @@ export default function MenuResumes() {
           <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={10}
+          value={selectedSkills}
+          onChange={handleChangeT}
           sx={{width:'20%',marginLeft:'auto'}}
         >
           <MenuItem value={10}>₽</MenuItem>

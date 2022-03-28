@@ -16,28 +16,25 @@ interface Props {
 
 const JobItem: FC<Props> = ({ title, company, salary }) => {
   return (
-      <Card sx={{ minWidth: 275 }}>
-        <CardContent>
-          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
-            {title}
-          </Typography>
-          <Typography variant="h5" component="div">
-            {company}
-          </Typography>
-          <Typography sx={{ mb: 1.5 }} color="text.secondary">
-            {salary}
-          </Typography>
-          <Typography variant="body2">
-            well meaning and kindly.
-            <br />
-            {'"a benevolent smile"'}
-          </Typography>
-        </CardContent>
-        <CardActions>
-          <Button size="small">More</Button>
-        </CardActions>
-      </Card>
-    
+    <Card sx={{ minWidth: 275,marginBottom:"2%" }}>
+    <CardMedia
+      component="img"
+      height="140"
+      image="./img/den_programmista_kartinki_5_03205541.jpg"
+      alt="image"
+    />
+    <CardContent>
+      <Typography gutterBottom variant="h5" component="div">
+        {title}
+      </Typography>
+      <Typography variant="body2" color="text.secondary">
+        {company}<br />{salary}
+      </Typography>
+    </CardContent>
+    <CardActions>
+      <Button size="small">More</Button>
+    </CardActions>
+  </Card>
   );
 };
 
