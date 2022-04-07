@@ -1,30 +1,39 @@
 import { useDispatch,useSelector } from 'react-redux'
 import React from 'react'
 import { AppState } from '../reducers/rootReducer'
-import { resumes, ResumesState, setResumes } from '../reducers/resumes'
+import {ResumesState, setResumes } from '../reducers/resumes'
 import Resumes, { Level } from '../types/Resume'
 import { getResumes } from '../api/quries'
 import { useState } from 'react'
-export type SearchType={
+export type SearchTypeResumes={
     level:keyof typeof Level | '',
-    tags:string[]
+    tags:string[],
+    experience:0,
+    page:number
 }
 type Props={
-    handleChangeLevel(value:keyof typeof Level):void,
+    handleChangeLevel(value:keyof typeof Level|''):void,
     handleChangeSkills(value:string[]):void,
-    search:SearchType,
+    handleChangeExperience(value: 0):void,
+    handleChangePage(value:number):void
+    search:SearchTypeResumes,
     list:Resumes[],
+    total:number
 }
 export const useResumes = (): Props => {
-    const [search,setSearch]=useState<SearchType>({
+    const [search,setSearch]=useState<SearchTypeResumes>({
         level: '',
-        tags:[]
+        tags:[],
+        experience:0,
+        page:1
     })
     const dispatch = useDispatch();
     const { list } = useSelector<AppState, ResumesState>((state) => state.resumes)
+    const [total, setTotal] = useState<number>(0);
     React.useEffect(()=>{
         getResumes().then((res)=>{
-            dispatch(setResumes(res.data))
+            dispatch(setResumes(res.data.list))
+            setTotal(res.data.total)
         })
     },[dispatch]);
     const handleChangeLevel=(value:keyof typeof Level | '')=>{
@@ -34,7 +43,7 @@ export const useResumes = (): Props => {
         }
         setSearch(newSearch);
         getResumes(newSearch).then((res)=>{
-            dispatch(setResumes(res.data))
+            dispatch(setResumes(res.data.list))
         })
 
     }
@@ -45,13 +54,36 @@ export const useResumes = (): Props => {
         }
         setSearch(newSearch);
         getResumes(newSearch).then((res)=>{
-            dispatch(setResumes(res.data))
+            dispatch(setResumes(res.data.list))
         })
     }
+    const handleChangeExperience=(value:0)=>{
+        const newSearch={
+            ...search,
+            experience:value
+        }
+        setSearch(newSearch);
+        getResumes(newSearch).then((res)=>{
+            dispatch(setResumes(res.data.list))
+        })
+    }
+    const handleChangePage=(value:number)=>{
+        const newSearch={
+          ...search,
+          page:value
+        }
+        setSearch(newSearch);
+        getResumes(newSearch).then((res)=>{
+          dispatch(setResumes(res.data.list))
+        })
+      }
     return{
         handleChangeLevel,
         handleChangeSkills,
+        handleChangeExperience,
+        handleChangePage,
         list,
-        search
+        search,
+        total
     }
 }

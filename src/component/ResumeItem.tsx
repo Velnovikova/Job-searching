@@ -5,17 +5,19 @@ import { ListItemAvatar,Avatar,ListItemText } from "@mui/material";
 import{TagList} from '../style/style';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+ 
 interface Props{
     name:string,
     experience:number,
     level:keyof typeof Level,
+    avatar:string,
     skills:string[]
 }
-const ResumeItem:FC<Props>=({name,experience,level,skills})=>{
+const ResumeItem:FC<Props>=({name,experience,level,skills,avatar})=>{
     return(
       <ListItem  >
       <ListItemAvatar>
-        <Avatar alt="image" src="./img/OIP.jpg" />
+        <Avatar alt="image" src={avatar} />
       </ListItemAvatar>
       <ListItemText
         primary={name}

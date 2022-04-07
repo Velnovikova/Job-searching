@@ -22,10 +22,9 @@ export const LinkItem = styled.p`
 margin-right:50px;
 `
 export const JobList=styled.div`
-display:flex;
-flex-wrap:wrap;
-justify-content: space-between;
-margin-left:2%;
+
+
+width:75%;
 `
 export const Searching=styled.div`
 display:flex;

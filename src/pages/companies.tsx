@@ -7,7 +7,7 @@ export default function Invoices() {
         
         <Content>
         <h2>Invoices</h2>
-          <MenuVacancies />
+          
         </Content>
       </MainLayout>
     );

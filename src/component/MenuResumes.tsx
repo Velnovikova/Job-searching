@@ -10,27 +10,32 @@ import { TextField } from '@mui/material';
 import { InputAdornment } from '@mui/material';
 import { OutlinedInput } from '@mui/material';
 import { ListItemText } from '@mui/material';
-import {MenuForm, Salary} from '../style/style';
-import { Level } from '../types/Resume';
+import { MenuForm, Salary } from '../style/style';
+import { Level} from '../types/Resume';
 
-type Props={
-  selectedLevel:keyof typeof Level | '',
-  selectedSkills:string[],
-  handleChangeLevel(param:string):void,
-  handleChangeSkills(param:string[]):void
+
+type Props = {
+  selectedLevel: keyof typeof Level | '',
+  selectedSkills: string[],
+  handleChangeLevel(param: string): void,
+  handleChangeSkills(param: string[]): void,
+ 
+
 }
-export default function MenuResumes({selectedLevel,selectedSkills,handleChangeLevel,handleChangeSkills}:Props) {
-  const handleChangeL=(e:SelectChangeEvent)=>{
+export default function MenuResumes({ selectedLevel, selectedSkills, handleChangeLevel, handleChangeSkills }: Props) {
+  const handleChangeLevelNew = (e: SelectChangeEvent) => {
     handleChangeLevel(e.target.value as string)
+    console.log(e.target.value)
   }
-  const handleChangeT = (event: SelectChangeEvent<typeof selectedSkills>) => {
+  const handleChangeSkillsNew = (event: SelectChangeEvent<typeof selectedSkills>) => {
     const {
       target: { value },
     } = event;
 
     handleChangeSkills(typeof value === 'string' ? value.split(',') : value);
   };
-  const tags = ['react', 'php', 'typescript', 'redux', 'html', 'css'];
+  const tags = ['react', 'php', 'typescript', 'redux', 'html', 'css', 'ruby', 'unix', 'mysql'];
+
   return (
 
     <MenuForm>
@@ -41,8 +46,8 @@ export default function MenuResumes({selectedLevel,selectedSkills,handleChangeLe
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={selectedLevel}
-          onChange={handleChangeL}
-          
+          onChange={handleChangeLevelNew}
+
         >
           <MenuItem value={Level.Junior}>Junior</MenuItem>
           <MenuItem value={Level.Middle}>Middle</MenuItem>
@@ -57,8 +62,8 @@ export default function MenuResumes({selectedLevel,selectedSkills,handleChangeLe
           id="demo-multiple-checkbox"
           multiple
           value={selectedSkills}
-          onChange={handleChangeT}
-          input={<OutlinedInput  />}
+          onChange={handleChangeSkillsNew}
+          input={<OutlinedInput />}
           renderValue={(selected) => selected.join(', ')}
         >
           {tags.map((tag) => (
@@ -69,30 +74,12 @@ export default function MenuResumes({selectedLevel,selectedSkills,handleChangeLe
           ))}
         </Select>
       </FormControl>
-      <FormGroup>
-        <h3>Зарплата</h3>
-        <Salary>
-          <TextField
-            id="outlined-start-adornment"
-            sx={{ width: '70%'}}
-            InputProps={{
-              startAdornment: <InputAdornment position="start">От</InputAdornment>,
-            }}
-          />
-          <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={selectedSkills}
-          onChange={handleChangeT}
-          sx={{width:'20%',marginLeft:'auto'}}
-        >
-          <MenuItem value={10}>₽</MenuItem>
-          <MenuItem value={20}>$</MenuItem>
-          <MenuItem value={30}>€</MenuItem>
-        </Select>
-        </Salary>
-        <FormControlLabel control={<Checkbox />} label={'Указана'}></FormControlLabel>
-      </FormGroup>
+      <FormControl >
+        <h3>Опыт работы</h3>
+        <InputLabel id="demo-simple-select-label"></InputLabel>
+        
+        
+      </FormControl>
     </MenuForm>
   )
 }

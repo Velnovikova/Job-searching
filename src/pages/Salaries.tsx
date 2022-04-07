@@ -8,7 +8,7 @@ export default function Salaries() {
       <MainLayout>
           <Content>
           <h2>Salaries</h2>
-          <MenuVacancies />
+          
         </Content>
       </MainLayout>
     );
