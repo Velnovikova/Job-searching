@@ -11,7 +11,7 @@ import { Avatar } from '@mui/material';
 import { ListItemText } from '@mui/material';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import{TagList} from '../style/style';
+import { TagList } from '../style/style';
 import styled from '@emotion/styled';
 
 
@@ -32,9 +32,9 @@ interface Props {
 
 const JobItem: FC<Props> = ({ title, company, salary, avatar, activity, level, rating, skills, currency }) => {
   return (
-    <ListItem sx={{display:'flex',justifyContent:'space-between'}} >
-      <div style={{width:'30%',display:'flex'}}>
-        <ListItemAvatar sx={{alignSelf:'center'}}>
+    <ListItem sx={{ display: 'flex', justifyContent: 'space-between' }} >
+      <div style={{ width: '30%', display: 'flex' }}>
+        <ListItemAvatar sx={{ alignSelf: 'center' }}>
           <Avatar alt="image" src={avatar} />
         </ListItemAvatar>
         <ListItemText sx={{}} primary={title}
@@ -45,29 +45,28 @@ const JobItem: FC<Props> = ({ title, company, salary, avatar, activity, level, r
                 variant="body2"
                 color="text.primary"
               >
-                {company}:{rating}<br/>
+                {company}:{rating}<br />
               </Typography>
               {salary} {currency}
             </React.Fragment>
           }
         />
       </div>
-      <div style={{width:'60%'}}>
-      <ListItemText
-        sx={{ marginRight: 0 }}
-        secondary={
-          <React.Fragment>
-            <Typography
-              sx={{ color: 'green', }}
-            >
-              {level}
-            </Typography>
-            <TagList>{activity.map((act)=>(<p style={{marginRight:'5px',marginBottom:0,marginTop:0,fontSize:'16px'}}>{act}</p>))}</TagList>
-            <p style={{margin:0,fontWeight:700}}>Necessary skills:</p><TagList>{skills.map((tag)=>(<p style={{marginRight:'5px',marginTop:0}}>{tag}</p>))}</TagList>
-
-          </React.Fragment>
-        }
-      />
+      <div style={{ width: '60%' }}>
+        <ListItemText
+          sx={{ marginRight: 0 }}
+          secondary={
+            <React.Fragment>
+              <Typography
+                sx={{ color: 'green', }}
+              >
+                {level}
+              </Typography>
+              <TagList>{activity.map((act) => (<p style={{ marginRight: '5px', marginBottom: 0, marginTop: 0, fontSize: '16px' }}>{act}</p>))}</TagList>
+              <p style={{ margin: 0, fontWeight: 700 }}>Necessary skills:</p><TagList>{skills.map((tag) => (<p style={{ marginRight: '5px', marginTop: 0 }}>{tag}</p>))}</TagList>
+            </React.Fragment>
+          }
+        />
       </div>
       <Button size="small">More</Button>
     </ListItem>

@@ -2,30 +2,27 @@ import * as React from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import FormGroup from '@mui/material/FormControl'
-import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { TextField } from '@mui/material';
-import { InputAdornment } from '@mui/material';
 import { OutlinedInput } from '@mui/material';
 import { ListItemText } from '@mui/material';
-import { MenuForm, Salary } from '../style/style';
-import { Level} from '../types/Resume';
+import { MenuForm } from '../style/style';
+import { Level } from '../types/Resume';
 
 
 type Props = {
   selectedLevel: keyof typeof Level | '',
   selectedSkills: string[],
+  selectedExperience: number,
   handleChangeLevel(param: string): void,
   handleChangeSkills(param: string[]): void,
- 
+  handleChangeExperience(param: number): void,
+
 
 }
-export default function MenuResumes({ selectedLevel, selectedSkills, handleChangeLevel, handleChangeSkills }: Props) {
-  const handleChangeLevelNew = (e: SelectChangeEvent) => {
-    handleChangeLevel(e.target.value as string)
-    console.log(e.target.value)
+export default function MenuResumes({ selectedLevel, selectedSkills, selectedExperience, handleChangeLevel, handleChangeSkills, handleChangeExperience }: Props) {
+  const handleChangeLevelNew = (event: SelectChangeEvent) => {
+    handleChangeLevel(event.target.value as string)
   }
   const handleChangeSkillsNew = (event: SelectChangeEvent<typeof selectedSkills>) => {
     const {
@@ -34,7 +31,11 @@ export default function MenuResumes({ selectedLevel, selectedSkills, handleChang
 
     handleChangeSkills(typeof value === 'string' ? value.split(',') : value);
   };
+  const handleChangeExperienceNew = (event: SelectChangeEvent<number>) => {
+    handleChangeExperience(event.target.value as unknown as number)
+  }
   const tags = ['react', 'php', 'typescript', 'redux', 'html', 'css', 'ruby', 'unix', 'mysql'];
+
 
   return (
 
@@ -76,9 +77,22 @@ export default function MenuResumes({ selectedLevel, selectedSkills, handleChang
       </FormControl>
       <FormControl >
         <h3>Опыт работы</h3>
-        <InputLabel id="demo-simple-select-label"></InputLabel>
-        
-        
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={selectedExperience}
+          onChange={handleChangeExperienceNew}
+
+        >
+          <MenuItem value={0}>Любой</MenuItem>
+          <MenuItem value={1}>От 1 года</MenuItem>
+          <MenuItem value={2}>От 2-х лет</MenuItem>
+          <MenuItem value={3}>От 3-х лет</MenuItem>
+          <MenuItem value={4}>От 4-х лет</MenuItem>
+          <MenuItem value={5}>От 5-ти лет</MenuItem>
+          <MenuItem value={6}>От 6-ти лет</MenuItem>
+
+        </Select>
       </FormControl>
     </MenuForm>
   )

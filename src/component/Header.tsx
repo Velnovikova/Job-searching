@@ -10,14 +10,14 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 
 export default function Header() {
     return (
-        <AppBar  style={{ position:'static',background: 'black',width:'100%' }}>
-           <Toolbar>
+        <AppBar style={{ position: 'static', background: 'black', width: '100%' }}>
+            <Toolbar>
                 <Link to="/" style={{ textDecoration: 'none', color: 'white', fontSize: '18px', fontWeight: '500', textTransform: 'uppercase' }}><LinkItem>Jobs</LinkItem></Link>
                 <Link to="/expenses" style={{ textDecoration: 'none', color: 'white', fontSize: '18px', fontWeight: '500', textTransform: 'uppercase' }}><LinkItem>Specialist</LinkItem></Link>
                 <Link to="/invoices" style={{ textDecoration: 'none', color: 'white', fontSize: '18px', fontWeight: '500', textTransform: 'uppercase' }}><LinkItem>Companies</LinkItem></Link>
                 <Link to="/salaries" style={{ textDecoration: 'none', color: 'white', fontSize: '18px', fontWeight: '500', textTransform: 'uppercase' }}><LinkItem>Salaries</LinkItem></Link>
                 <Searching>
-                    <Stack spacing={2} sx={{ width: 300, background: "white", height: '3rem',marginRight:'1%', borderRadius:'3%' }}>
+                    <Stack spacing={2} sx={{ width: 300, background: "white", height: '3rem', marginRight: '1%', borderRadius: '3%' }}>
                         <Autocomplete
                             id="free-solo-demo"
                             freeSolo
@@ -38,8 +38,8 @@ export default function Header() {
                         <MenuItem value={30}>Increasing salary</MenuItem>
                     </Select>
                 </Searching>
-                <Link to="/profile" style={{ textDecoration: 'none', color: 'white', fontSize: '18px', fontWeight: '500', textTransform: 'uppercase',marginLeft: 'auto' }}><LinkItem>Profile</LinkItem></Link>
-                
+                <Link to="/profile" style={{ textDecoration: 'none', color: 'white', fontSize: '18px', fontWeight: '500', textTransform: 'uppercase', marginLeft: 'auto' }}><LinkItem>Profile</LinkItem></Link>
+
             </Toolbar>
         </AppBar>
 

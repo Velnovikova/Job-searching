@@ -7,18 +7,15 @@ import MainLayout from "../layout/main";
 import { Pagination } from "@mui/material";
 import { getJobs } from "../api/quries";
 import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider";
-    
+
 
 export default function Vacancies() {
-    const { list,search,total, handleChangeActivity, handleChangeLevel,handleChangeSkills,handleChangeSalary,handleChangeCurrency,handleChangePage} = useJobs();
+    const { list, search, total, handleChangeActivity, handleChangeLevel, handleChangeSkills, handleChangeSalary, handleChangeCurrency, handleChangePage } = useJobs();
     const [page, setPage] = React.useState(1);
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-      setPage(value);
-      handleChangePage(value)
+        setPage(value);
+        handleChangePage(value)
     };
-    
-     
-    console.log(Math.ceil(total))
     return (
 
         <MainLayout>
@@ -42,9 +39,9 @@ export default function Vacancies() {
                         />
                     ))}
                 </JobList>
-                <MenuVacancies handleChangeActivity={handleChangeActivity} selectedLevel={search.level} handleChangeLevel={handleChangeLevel} selectedSkills={search.skills} handleChangeSkills={handleChangeSkills}selectedSalary={search.salary} handleChangeSalary={handleChangeSalary} handleChangeCurrency={handleChangeCurrency} selectedCurrency={search.currency}/>
+                <MenuVacancies handleChangeActivity={handleChangeActivity} selectedLevel={search.level} handleChangeLevel={handleChangeLevel} selectedSkills={search.skills} handleChangeSkills={handleChangeSkills} selectedSalary={search.salary} handleChangeSalary={handleChangeSalary} handleChangeCurrency={handleChangeCurrency} selectedCurrency={search.currency} />
             </Content>
-            <Pagination count={total/25} page={page} onChange={handleChange} />
+            <Pagination count={total / 25} page={page} onChange={handleChange} />
         </MainLayout>
 
     );

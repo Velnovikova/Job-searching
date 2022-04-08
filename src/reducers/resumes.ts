@@ -10,8 +10,8 @@ export type setResumesAction = {
     type: typeof SET_RESUMES,
     payload: Resumes[]
 }
-export type ResumesState={
-    list:Resumes[]
+export type ResumesState = {
+    list: Resumes[]
 }
 type Action = setResumesAction
 interface State {

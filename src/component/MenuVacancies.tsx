@@ -10,7 +10,6 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { TextField } from '@mui/material';
 import { ListItemText } from '@mui/material';
 import { OutlinedInput } from '@mui/material';
-import { InputAdornment, Input } from '@mui/material';
 import { MenuForm, Salary } from '../style/style';
 import { Level, } from '../types/Resume';
 import { Currency } from '../types/Job';
@@ -26,13 +25,12 @@ type Props = {
   handleChangeCurrency(param: string): void,
   handleChangeActivity(param: string[]): void,
 }
-export default function MenuVacancies({  selectedLevel, selectedSkills, selectedSalary, selectedCurrency, handleChangeActivity, handleChangeLevel, handleChangeSkills, handleChangeSalary, handleChangeCurrency }: Props) {
+export default function MenuVacancies({ selectedLevel, selectedSkills, selectedSalary, selectedCurrency, handleChangeActivity, handleChangeLevel, handleChangeSkills, handleChangeSalary, handleChangeCurrency }: Props) {
   const [check, setCheck] = useState<string[]>([])
   const handleChangeActivityNew = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (check.indexOf(event.target.value)>-1) {
+    if (check.indexOf(event.target.value) > -1) {
       const newCheck = check.filter(elem => elem != event.target.value);
       setCheck(newCheck)
-      console.log(newCheck)
       handleChangeActivity(newCheck)
     }
     else {
@@ -40,7 +38,6 @@ export default function MenuVacancies({  selectedLevel, selectedSkills, selected
         ...check,
         event.target.value
       ]
-      console.log(newCheck);
       setCheck(newCheck)
       handleChangeActivity(newCheck)
     }
@@ -53,7 +50,7 @@ export default function MenuVacancies({  selectedLevel, selectedSkills, selected
     const {
       target: { value },
     } = event;
-    console.log(value)
+    
 
     handleChangeSkills(typeof value === 'string' ? value.split(',') : value);
   };

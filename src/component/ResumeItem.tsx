@@ -1,21 +1,21 @@
-import React,{FC} from "react";
-import { Level } from "../types/Resume"; 
+import React, { FC } from "react";
+import { Level } from "../types/Resume";
 import { ListItem } from "@mui/material";
-import { ListItemAvatar,Avatar,ListItemText } from "@mui/material";
-import{TagList} from '../style/style';
+import { ListItemAvatar, Avatar, ListItemText } from "@mui/material";
+import { TagList } from '../style/style';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
- 
-interface Props{
-    name:string,
-    experience:number,
-    level:keyof typeof Level,
-    avatar:string,
-    skills:string[]
+
+interface Props {
+  name: string,
+  experience: number,
+  level: keyof typeof Level,
+  avatar: string,
+  skills: string[]
 }
-const ResumeItem:FC<Props>=({name,experience,level,skills,avatar})=>{
-    return(
-      <ListItem  >
+const ResumeItem: FC<Props> = ({ name, experience, level, skills, avatar }) => {
+  return (
+    <ListItem  >
       <ListItemAvatar>
         <Avatar alt="image" src={avatar} />
       </ListItemAvatar>
@@ -24,15 +24,15 @@ const ResumeItem:FC<Props>=({name,experience,level,skills,avatar})=>{
         secondary={
           <React.Fragment>
             <Typography
-              sx={{color:"green"}}
+              sx={{ color: "green" }}
               component="span"
               variant="body2"
               color="text.primary"
             >
-              {level}<br/>
+              {level}<br />
             </Typography>
-            <TagList>{skills.map((tag)=>(
-              <p style={{marginRight:'1%'}}>{tag}</p>
+            <TagList>{skills.map((tag) => (
+              <p style={{ marginRight: '1%' }}>{tag}</p>
             ))}</TagList>
             {experience} years
           </React.Fragment>
@@ -40,6 +40,6 @@ const ResumeItem:FC<Props>=({name,experience,level,skills,avatar})=>{
       />
       <Button size="small">More</Button>
     </ListItem>
-    )
+  )
 }
 export default ResumeItem;

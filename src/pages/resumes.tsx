@@ -7,12 +7,12 @@ import MenuResumes from "../component/MenuResumes";
 import { useResumes } from "../init/useResumes";
 import ResumeItem from "../component/ResumeItem";
 export default function Resumes() {
-  const { list,search,total,handleChangeLevel,handleChangeSkills,handleChangePage } = useResumes()
+  const { list, search, total, handleChangeLevel, handleChangeSkills,handleChangeExperience, handleChangePage } = useResumes()
   const [page, setPage] = React.useState(1);
-    const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-      setPage(value);
-      handleChangePage(value)
-    };
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+    handleChangePage(value)
+  };
   return (
     <MainLayout>
       <Content>
@@ -29,9 +29,9 @@ export default function Resumes() {
             />
           ))}
         </ResumesList>
-        <MenuResumes selectedLevel={search.level} selectedSkills={search.tags}  handleChangeLevel={handleChangeLevel} handleChangeSkills={handleChangeSkills}/>
+        <MenuResumes selectedLevel={search.level} selectedSkills={search.tags} selectedExperience={search.experience} handleChangeLevel={handleChangeLevel} handleChangeSkills={handleChangeSkills} handleChangeExperience={handleChangeExperience} />
       </Content>
-      <Pagination count={total/25} page={page} onChange={handleChange} />
+      <Pagination count={total / 25} page={page} onChange={handleChange} />
     </MainLayout>
   );
 }

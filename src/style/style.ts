@@ -1,12 +1,12 @@
 import styled from '@emotion/styled';
-export const SearchMenu=styled.div`
+export const SearchMenu = styled.div`
 display:flex;
 flex-direction:column;`
-export const Content=styled.div`
+export const Content = styled.div`
 min-height: 920px;
 display:flex;
 `
- export const MenuForm = styled.div`
+export const MenuForm = styled.div`
   display:flex;
   flex-direction:column;
   margin-left:auto;
@@ -16,24 +16,24 @@ display:flex;
 export const Salary = styled.div`
 display:flex;
 `;
-export const LinkList=styled.ul`
+export const LinkList = styled.ul`
 display:flex;`
 export const LinkItem = styled.p`
 margin-right:50px;
 `
-export const JobList=styled.div`
+export const JobList = styled.div`
 
 
 width:75%;
 `
-export const Searching=styled.div`
+export const Searching = styled.div`
 display:flex;
 margin-left:auto;
 `
-export const ResumesList=styled.div`
+export const ResumesList = styled.div`
 width:75%;
 `
-export const TagList=styled.section`
+export const TagList = styled.section`
 display:flex;
 text-transform: capitalize;
 `
