@@ -1,4 +1,3 @@
-import Header from "../component/Header";
 import React from "react";
 import { Content, JobList, ResumesList } from "../style/style";
 import { Pagination } from "@mui/material";
@@ -8,10 +7,9 @@ import { useResumes } from "../init/useResumes";
 import ResumeItem from "../component/ResumeItem";
 export default function Resumes() {
   const { list, search, total, handleChangeLevel, handleChangeSkills,handleChangeExperience, handleChangePage } = useResumes()
-  const [page, setPage] = React.useState(1);
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    setPage(value);
-    handleChangePage(value)
+    search.page=value
+    handleChangePage(search.page)
   };
   return (
     <MainLayout>
@@ -31,7 +29,7 @@ export default function Resumes() {
         </ResumesList>
         <MenuResumes selectedLevel={search.level} selectedSkills={search.tags} selectedExperience={search.experience} handleChangeLevel={handleChangeLevel} handleChangeSkills={handleChangeSkills} handleChangeExperience={handleChangeExperience} />
       </Content>
-      <Pagination count={total / 25} page={page} onChange={handleChange} />
+      <Pagination count={total / 25} page={search.page} onChange={handleChange} />
     </MainLayout>
   );
 }

@@ -5,6 +5,7 @@ flex-direction:column;`
 export const Content = styled.div`
 min-height: 920px;
 display:flex;
+margin:1%;
 `
 export const MenuForm = styled.div`
   display:flex;
@@ -37,6 +38,8 @@ export const TagList = styled.section`
 display:flex;
 text-transform: capitalize;
 `
+export const ErrorText=styled.p`
+color:red`
 export const FooterSt = styled.footer`
 color:white;
 background-color:black;

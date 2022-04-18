@@ -18,6 +18,7 @@ type Props = {
   selectedLevel: keyof typeof Level | '',
   selectedSkills: string[],
   selectedSalary: number,
+  selectedActivity:string[],
   selectedCurrency: keyof typeof Currency | '',
   handleChangeLevel(param: string): void,
   handleChangeSkills(param: string[]): void,
@@ -25,21 +26,20 @@ type Props = {
   handleChangeCurrency(param: string): void,
   handleChangeActivity(param: string[]): void,
 }
-export default function MenuVacancies({ selectedLevel, selectedSkills, selectedSalary, selectedCurrency, handleChangeActivity, handleChangeLevel, handleChangeSkills, handleChangeSalary, handleChangeCurrency }: Props) {
-  const [check, setCheck] = useState<string[]>([])
+export default function MenuVacancies({ selectedLevel, selectedSkills, selectedSalary,selectedActivity, selectedCurrency, handleChangeActivity, handleChangeLevel, handleChangeSkills, handleChangeSalary, handleChangeCurrency }: Props) {
   const handleChangeActivityNew = (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (check.indexOf(event.target.value) > -1) {
-      const newCheck = check.filter(elem => elem != event.target.value);
-      setCheck(newCheck)
-      handleChangeActivity(newCheck)
+    if (selectedActivity.indexOf(event.target.value) > -1) {
+      const newActivity = selectedActivity.filter(elem => elem != event.target.value);
+      selectedActivity=newActivity
+      handleChangeActivity(selectedActivity)
     }
     else {
-      const newCheck = [
-        ...check,
+      const newActivity = [
+        ...selectedActivity,
         event.target.value
       ]
-      setCheck(newCheck)
-      handleChangeActivity(newCheck)
+      selectedActivity=newActivity
+      handleChangeActivity(selectedActivity)
     }
 
   }
@@ -66,9 +66,7 @@ export default function MenuVacancies({ selectedLevel, selectedSkills, selectedS
   return (
 
     <MenuForm>
-
       <h3>Сфера деятельности</h3>
-
       {activities.map((activity) => (
         <FormControlLabel control={<Checkbox onChange={handleChangeActivityNew} value={activity} />} label={activity}></FormControlLabel>
       ))}
@@ -111,7 +109,7 @@ export default function MenuVacancies({ selectedLevel, selectedSkills, selectedS
       <FormGroup >
         <h3>Зарплата</h3>
         <Salary>
-          <TextField value={selectedSalary} label="От" sx={{ width: '70%' }} inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} onChange={handleChangeSalaryNew} />
+          <TextField  value={selectedSalary} label="От" sx={{ width: '70%' }} inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} onChange={handleChangeSalaryNew} />
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"

@@ -22,7 +22,7 @@ type Props = {
 }
 export default function MenuResumes({ selectedLevel, selectedSkills, selectedExperience, handleChangeLevel, handleChangeSkills, handleChangeExperience }: Props) {
   const handleChangeLevelNew = (event: SelectChangeEvent) => {
-    handleChangeLevel(event.target.value as string)
+    handleChangeLevel(String(event.target.value))
   }
   const handleChangeSkillsNew = (event: SelectChangeEvent<typeof selectedSkills>) => {
     const {
@@ -32,7 +32,7 @@ export default function MenuResumes({ selectedLevel, selectedSkills, selectedExp
     handleChangeSkills(typeof value === 'string' ? value.split(',') : value);
   };
   const handleChangeExperienceNew = (event: SelectChangeEvent<number>) => {
-    handleChangeExperience(event.target.value as unknown as number)
+    handleChangeExperience (Number(event.target.value))
   }
   const tags = ['react', 'php', 'typescript', 'redux', 'html', 'css', 'ruby', 'unix', 'mysql'];
 
