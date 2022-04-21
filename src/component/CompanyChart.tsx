@@ -6,9 +6,9 @@ type Props={
     labels:string[],
     rating:number[]
 }
-
+ChartJS.register(ArcElement, Tooltip, Legend);
 export function CompanyChart({labels,rating}:Props) {
-    ChartJS.register(ArcElement, Tooltip, Legend);
+   
  const data = {
   labels: labels,
   datasets: [

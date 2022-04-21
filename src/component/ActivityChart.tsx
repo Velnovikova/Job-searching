@@ -5,25 +5,19 @@ import { Doughnut } from 'react-chartjs-2';
 type Props={
   activities:object[]
 }
-export function ActivityChart({activities}:Props){
-  let labelsNew:string[]=[]
-  activities.map((item)=>{
-    const labelNew=Object.keys(item)[0];
-    labelsNew=[
-      ...labelsNew,
-      labelNew
-    ]
-  })
-let ratingListNew:number[]=[]
-activities.map((item)=>{
-  const ratingNew=Object.values(item)[0];
-  ratingListNew=[
-    ...ratingListNew,
-    ratingNew
-  ]
-})
-  
 ChartJS.register(ArcElement, Tooltip, Legend);
+
+export function ActivityChart({activities}:Props){
+
+ const labelsNew=activities.map((item)=>{
+   return Object.keys(item)[0]
+ })
+const ratingListNew=activities.map((item=>{
+  return Object.values(item)[0]
+}))
+
+  
+
  const data = {
   labels: labelsNew,
   datasets: [

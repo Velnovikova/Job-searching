@@ -1,15 +1,17 @@
 import React from "react";
+import { useState } from "react";
 import { Content, JobList, ResumesList } from "../style/style";
 import { Pagination } from "@mui/material";
 import MainLayout from "../layout/main";
 import MenuResumes from "../component/MenuResumes";
 import { useResumes } from "../init/useResumes";
 import ResumeItem from "../component/ResumeItem";
+
 export default function Resumes() {
-  const { list, search, total, handleChangeLevel, handleChangeSkills,handleChangeExperience, handleChangePage } = useResumes()
+  
+  const { list, search, total, handleChangeLevel, handleChangeSkills,handleChangeExperience, handleChangePage } = useResumes();
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-    search.page=value
-    handleChangePage(search.page)
+    handleChangePage(value)
   };
   return (
     <MainLayout>

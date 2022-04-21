@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import MenuVacancies from "../component/MenuVacancies";
 import { useJobs } from '../init/useJobs';
 import JobItem from '../component/JobItem';
@@ -12,8 +13,7 @@ import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider";
 export default function Vacancies() {
     const { list, search, total, handleChangeActivity, handleChangeLevel, handleChangeSkills, handleChangeSalary, handleChangeCurrency, handleChangePage } = useJobs();
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-       search.page=value
-        handleChangePage(search.page)
+        handleChangePage(value)
     };
     return (
 

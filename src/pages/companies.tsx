@@ -11,7 +11,7 @@ export default function Invoices() {
     name:string
     rating:number
   }
-  //let companies:object[]=[{'Wolff, Ferry and Yost':10},{'Roob Inc':4},{'Renner, Howell and Pouros':21},{'McGlynn-Aufderhar':7},{'Hilpert, Collins and Homenick':5},{'Hahn-Ritchie':43},{'Bruen Group':23},{'Nitzsche, Rice and Purdy':15},{'Zulauf and Sons':45},{'Nitzsche-Nikolaus':12}]
+
   const [companies,setCompanies]=useState<Company[]>([
     {name:'Wolff, Ferry and Yost',rating:10},
     {name:'Roob Inc',rating:4},
@@ -25,22 +25,13 @@ export default function Invoices() {
     {name:'Nitzsche-Nikolaus',rating:3}
   ])
 
-  let labelsNew:string[]=[]
-companies.map((item)=>{
-    const labelNew=item.name
-    labelsNew=[
-      ...labelsNew,
-      labelNew
-    ]
+  const labelsNew=companies.map((item)=>{
+    return item.name
   })
-  let ratingListNew:number[]=[]
-companies.map((item)=>{
-    const ratingNew=item.rating;
-    ratingListNew=[
-      ...ratingListNew,
-      ratingNew
-    ]
+  const ratingListNew=companies.map((item)=>{
+    return item.rating
   })
+  
 const handleChangeLike=(label:string):void=>{
     setCompanies(companies.map(item => {
       if(item.name == label) {

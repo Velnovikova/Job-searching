@@ -12,7 +12,7 @@ export default function Salaries() {
     <MainLayout>
       <Content>
         <div style={{width:'50%'}}><SalaryChart  salaries={salary_medium_per_month}/></div>
-        <div style={{width:'22%',marginLeft:'auto',marginRight:'7%',alignContent:'center'}}>
+        <div style={{width:'22%',marginLeft:'auto',marginRight:'10%',alignContent:'center'}}>
           <p style={{margin:0,textAlign:'center'}}>Rating of vacancies</p>
           <ActivityChart activities={activity_count}/>
           </div>
