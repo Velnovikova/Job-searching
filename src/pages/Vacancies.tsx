@@ -1,30 +1,46 @@
+import React from "react";
+import { useState } from "react";
 import MenuVacancies from "../component/MenuVacancies";
 import { useJobs } from '../init/useJobs';
 import JobItem from '../component/JobItem';
 import { Content, JobList } from "../style/style";
 import MainLayout from "../layout/main";
+import { Pagination } from "@mui/material";
+import { getJobs } from "../api/quries";
+import { ThemeConsumer } from "react-bootstrap/esm/ThemeProvider";
+
 
 export default function Vacancies() {
-    const { list } = useJobs();
+    const { list, search, total, handleChangeActivity, handleChangeLevel, handleChangeSkills, handleChangeSalary, handleChangeCurrency, handleChangePage } = useJobs();
+    const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+        handleChangePage(value)
+    };
     return (
 
         <MainLayout>
             <Content>
-                <div>
+                <JobList>
                     <h2>Vacancies</h2>
-                    <JobList>
-                        {list.map((job) => (
-                            <JobItem
-                                key={job.id}
-                                title={job.title}
-                                salary={job.salary}
-                                company={job.company}
-                            />
-                        ))}
-                    </JobList>
-                </div>
-                <MenuVacancies />
+                    {list.map((job) => (
+                        <JobItem
+                            key={job.id}
+                            title={job.title}
+                            salary={job.salary}
+                            company={job.company}
+                            level={job.level}
+                            avatar={job.avatar}
+                            rating={job.rating}
+                            created_at={job.created_at}
+                            is_salary={job.is_salary}
+                            skills={job.skills}
+                            currency={job.currency}
+                            activity={job.activity}
+                        />
+                    ))}
+                </JobList>
+                <MenuVacancies handleChangeActivity={handleChangeActivity} selectedLevel={search.level} handleChangeLevel={handleChangeLevel} selectedSkills={search.skills} selectedActivity={search.activity} handleChangeSkills={handleChangeSkills} selectedSalary={search.salary} handleChangeSalary={handleChangeSalary} handleChangeCurrency={handleChangeCurrency} selectedCurrency={search.currency} />
             </Content>
+            <Pagination count={total / 25} page={search.page} onChange={handleChange} />
         </MainLayout>
 
     );

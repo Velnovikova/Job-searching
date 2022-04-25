@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useState } from 'react';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -7,70 +8,119 @@ import FormControlLabel from '@mui/material/FormControlLabel'
 import Checkbox from '@mui/material/Checkbox'
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { TextField } from '@mui/material';
-import { InputAdornment } from '@mui/material';
-import {MenuForm, Salary} from '../style/style';
+import { ListItemText } from '@mui/material';
+import { OutlinedInput } from '@mui/material';
+import { MenuForm, Salary } from '../style/style';
+import { Level, } from '../types/Resume';
+import { Currency } from '../types/Job';
 
+type Props = {
+  selectedLevel: keyof typeof Level | '',
+  selectedSkills: string[],
+  selectedSalary: number,
+  selectedActivity:string[],
+  selectedCurrency: keyof typeof Currency | '',
+  handleChangeLevel(param: string): void,
+  handleChangeSkills(param: string[]): void,
+  handleChangeSalary(param: number): void,
+  handleChangeCurrency(param: string): void,
+  handleChangeActivity(param: string[]): void,
+}
+export default function MenuVacancies({ selectedLevel, selectedSkills, selectedSalary,selectedActivity, selectedCurrency, handleChangeActivity, handleChangeLevel, handleChangeSkills, handleChangeSalary, handleChangeCurrency }: Props) {
+  const handleChangeActivityNew = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (selectedActivity.indexOf(event.target.value) > -1) {
+      const newActivity = selectedActivity.filter(elem => elem != event.target.value);
+      selectedActivity=newActivity
+      handleChangeActivity(selectedActivity)
+    }
+    else {
+      const newActivity = [
+        ...selectedActivity,
+        event.target.value
+      ]
+      selectedActivity=newActivity
+      handleChangeActivity(selectedActivity)
+    }
 
-export default function MenuVacancies() {
+  }
+  const handleChangeLevelNew = (e: SelectChangeEvent) => {
+    handleChangeLevel(e.target.value as string)
+  }
+  const handleChangeSkillsNew = (event: SelectChangeEvent<typeof selectedSkills>) => {
+    const {
+      target: { value },
+    } = event;
+    
 
+    handleChangeSkills(typeof value === 'string' ? value.split(',') : value);
+  };
+  const handleChangeSalaryNew = (e: React.ChangeEvent<HTMLInputElement>) => {
+    handleChangeSalary(e.target.value as unknown as number)
+  }
+  const handleChangeCurrencyNew = (e: SelectChangeEvent) => {
+    handleChangeCurrency(e.target.value as string)
+  }
 
+  const activities = ['Frontend', 'Backend', 'Design', 'Analytics', 'Testing', 'Administration', 'Management', 'Marketing', 'Applications']
+  const tags = ['react', 'php', 'typescript', 'redux', 'html', 'css', 'ruby', 'unix', 'mysql'];
   return (
 
     <MenuForm>
-      <FormGroup><h3>Сфера деятельности</h3>
-        <FormControlLabel control={<Checkbox />} label={'Фронтенд'}></FormControlLabel>
-        <FormControlLabel control={<Checkbox />} label={'Бэкенд'}></FormControlLabel>
-        <FormControlLabel control={<Checkbox />} label={'Приложения'}></FormControlLabel>
-        <FormControlLabel control={<Checkbox />} label={'Разработка ПО'}></FormControlLabel>
-        <FormControlLabel control={<Checkbox />} label={'Тестирование'}></FormControlLabel>
-        <FormControlLabel control={<Checkbox />} label={'Администрирование'}></FormControlLabel>
-      </FormGroup>
-      <FormControl >
+      <h3>Сфера деятельности</h3>
+      {activities.map((activity) => (
+        <FormControlLabel control={<Checkbox onChange={handleChangeActivityNew} value={activity} />} label={activity}></FormControlLabel>
+      ))}
+
+      <FormControl>
         <h3>Квалификация</h3>
         <InputLabel id="demo-simple-select-label"></InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={10}
+          value={selectedLevel}
+          onChange={handleChangeLevelNew}
+
         >
-          <MenuItem value={10}>Любая</MenuItem>
-          <MenuItem value={20}>Квалификация</MenuItem>
-          <MenuItem value={30}>Квалификация</MenuItem>
+          <MenuItem value={Level.Junior}>Junior</MenuItem>
+          <MenuItem value={Level.Middle}>Middle</MenuItem>
+          <MenuItem value={Level.Senior}>Senior</MenuItem>
         </Select>
       </FormControl>
       <FormControl >
         <h3>Професиональные навыки</h3>
         <InputLabel id="demo-simple-select-label"></InputLabel>
         <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={10}
+          labelId="demo-multiple-checkbox-label"
+          id="demo-multiple-checkbox"
+          multiple
+          value={selectedSkills}
+          onChange={handleChangeSkillsNew}
+          input={<OutlinedInput />}
+          renderValue={(selected) => selected.join(', ')}
         >
-          <MenuItem value={10}>Навык</MenuItem>
-          <MenuItem value={20}>Навык</MenuItem>
-          <MenuItem value={30}>Навык</MenuItem>
+          {tags.map((tag) => (
+            <MenuItem key={tag} value={tag}>
+              <Checkbox />
+              <ListItemText primary={tag} />
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
-      <FormGroup>
+      <FormGroup >
         <h3>Зарплата</h3>
         <Salary>
-          <TextField
-            id="outlined-start-adornment"
-            sx={{ width: '70%'}}
-            InputProps={{
-              startAdornment: <InputAdornment position="start">От</InputAdornment>,
-            }}
-          />
+          <TextField  value={selectedSalary} label="От" sx={{ width: '70%' }} inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} onChange={handleChangeSalaryNew} />
           <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={10}
-          sx={{width:'20%',marginLeft:'auto'}}
-        >
-          <MenuItem value={10}>₽</MenuItem>
-          <MenuItem value={20}>$</MenuItem>
-          <MenuItem value={30}>€</MenuItem>
-        </Select>
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={selectedCurrency}
+            onChange={handleChangeCurrencyNew}
+            sx={{ width: '20%', marginLeft: 'auto' }}
+          >
+            <MenuItem value={Currency.RUB}>₽</MenuItem>
+            <MenuItem value={Currency.USD}>$</MenuItem>
+            <MenuItem value={Currency.EUR}>€</MenuItem>
+          </Select>
         </Salary>
         <FormControlLabel control={<Checkbox />} label={'Указана'}></FormControlLabel>
       </FormGroup>
